@@ -36,7 +36,7 @@ function getQueryParam(param) {
 function renderGallery(styleName) {
     const gallery = document.getElementById('gallery-cascade');
     if (styleName === 'identidad') {
-        // Identidad Corporativa: 4 cards cuadradas, diseño uniforme y clicables
+        // Identidad Corporativa: 6 cards cuadradas, diseño uniforme y clicables
         const identidadData = [
             {
                 name: 'Dra',
@@ -57,6 +57,16 @@ function renderGallery(styleName) {
                 name: '7Metropolis',
                 img: 'imagenes/diseño/identidad/7Metropolis/Logos/logo colaboraciones.png',
                 label: '7Metropolis'
+            },
+            {
+                name: 'Kresala',
+                img: 'imagenes/diseño/identidad/kresala/kresala 4 jpeg.jpg',
+                label: 'Kresala'
+            },
+            {
+                name: 'JCV/EGL',
+                img: 'imagenes/diseño/identidad/gaztea/kooperatu.jpg',
+                label: 'JCV/EGL'
             }
         ];
         gallery.innerHTML = `
@@ -425,7 +435,7 @@ function openModalPortfolio(idx) {
 // Nueva función para mostrar el detalle de cada identidad
 function renderIdentidadDetalle(identidad) {
     const gallery = document.getElementById('gallery-cascade');
-    let html = `<button class="gallery-cascade-btn" style="margin-bottom:2rem;" onclick="renderGallery('identidad')">&larr; Volver</button>`;
+    let html = '';
     if (identidad === 'Dra') {
         html += `<h2 style='color:#fff;margin-bottom:1.5rem;'>Dra</h2>`;
         // Logos (todos los indicados)
