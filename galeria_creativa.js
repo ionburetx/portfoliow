@@ -428,40 +428,117 @@ function renderIdentidadDetalle(identidad) {
     let html = `<button class="gallery-cascade-btn" style="margin-bottom:2rem;" onclick="renderGallery('identidad')">&larr; Volver</button>`;
     if (identidad === 'Dra') {
         html += `<h2 style='color:#fff;margin-bottom:1.5rem;'>Dra</h2>`;
-        // Banners
-        html += `<h3 style='color:#fff;margin:1.2rem 0 0.7rem;'>Banners</h3><div class='cascade-img-row'>`;
-        ["facebokprest.jpg","facebokprest2.jpg"].forEach(img => {
-            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Dra/Banners/${img}' class='cascade-img' alt='Banner Dra'></div>`;
-        });
-        html += `</div>`;
-        // Flyers
-        html += `<h3 style='color:#fff;margin:1.2rem 0 0.7rem;'>Flyers</h3><div class='cascade-img-row'>`;
-        ["HOTEL ADULT ANVERSO.jpg","HOTEL ADULT REVERSO2.jpg","HOTEL CHILD ANVERSO.jpg","HOTEL CHILD REVERSO 2.jpg"].forEach(img => {
-            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Dra/flyers/${img}' class='cascade-img' alt='Flyer Dra'></div>`;
-        });
-        html += `</div>`;
-        // Logotipos
+        // Logos (todos los indicados)
+        const logos = [
+            "dradultz.png",
+            "dradultb.png",
+            "drachild.png",
+            "drachildb.png",
+            "azulejo1.png",
+            "azulejo5.png",
+            "egurre4.png",
+            "egur kolori.png"
+        ];
         html += `<h3 style='color:#fff;margin:1.2rem 0 0.7rem;'>Logotipos</h3><div class='cascade-img-row'>`;
-        ["azulejo1.png","azulejo5.png","drachild.png","drachildb.png","dradultb.png","dradultz.png","egur kolori.png","egurre4.png"].forEach(img => {
-            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Dra/logu/${img}' class='cascade-img' alt='Logo Dra'></div>`;
-        });
-        html += `</div>`;
-        // Mailing
-        html += `<h3 style='color:#fff;margin:1.2rem 0 0.7rem;'>Mailing</h3><div class='cascade-img-row'>`;
-        ["definitibu nagusi 2.jpg","definitibu txiki.jpg","dra!paris.jpg"].forEach(img => {
-            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Dra/Mailing/${img}' class='cascade-img' alt='Mailing Dra'></div>`;
+        logos.forEach((img, idx) => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Dra/logu/${img}' class='cascade-img dra-img' alt='Logo Dra' data-dra-idx='${idx}' data-dra-group='logo'></div>`;
         });
         html += `</div>`;
         // Tarjetas
+        const tarjetas = ["tarjeti2.png","tarjeti3.png","tarjetiber.png","tarjetizb.png"];
         html += `<h3 style='color:#fff;margin:1.2rem 0 0.7rem;'>Tarjetas</h3><div class='cascade-img-row'>`;
-        ["tarjeti2.png","tarjeti3.png","tarjetiber.png","tarjetizb.png"].forEach(img => {
-            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Dra/Tarjeta/${img}' class='cascade-img' alt='Tarjeta Dra'></div>`;
+        tarjetas.forEach((img, idx) => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Dra/Tarjeta/${img}' class='cascade-img dra-img' alt='Tarjeta Dra' data-dra-idx='${logos.length+idx}' data-dra-group='tarjetas'></div>`;
         });
         html += `</div>`;
+        // Flyers
+        const flyers = ["HOTEL ADULT ANVERSO.jpg","HOTEL ADULT REVERSO2.jpg","HOTEL CHILD ANVERSO.jpg","HOTEL CHILD REVERSO 2.jpg"];
+        html += `<h3 style='color:#fff;margin:1.2rem 0 0.7rem;'>Flyers</h3><div class='cascade-img-row'>`;
+        flyers.forEach((img, idx) => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Dra/flyers/${img}' class='cascade-img dra-img' alt='Flyer Dra' data-dra-idx='${logos.length+tarjetas.length+idx}' data-dra-group='flyers'></div>`;
+        });
+        html += `</div>`;
+        // Mailing
+        const mailing = ["definitibu nagusi 2.jpg","definitibu txiki.jpg","dra!paris.jpg"];
+        html += `<h3 style='color:#fff;margin:1.2rem 0 0.7rem;'>Mailing</h3><div class='cascade-img-row'>`;
+        mailing.forEach((img, idx) => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Dra/Mailing/${img}' class='cascade-img dra-img' alt='Mailing Dra' data-dra-idx='${logos.length+tarjetas.length+flyers.length+idx}' data-dra-group='mailing'></div>`;
+        });
+        html += `</div>`;
+        // Banners
+        const banners = ["facebokprest.jpg","facebokprest2.jpg"];
+        html += `<h3 style='color:#fff;margin:1.2rem 0 0.7rem;'>Banners</h3><div class='cascade-img-row'>`;
+        banners.forEach((img, idx) => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Dra/Banners/${img}' class='cascade-img dra-img' alt='Banner Dra' data-dra-idx='${logos.length+tarjetas.length+flyers.length+mailing.length+idx}' data-dra-group='banners'></div>`;
+        });
+        html += `</div>`;
+        // Guardar todas las imágenes en orden para navegación
+        window.draImgs = [
+            ...logos.map(img => ({ src: `imagenes/diseño/identidad/Dra/logu/${img}`, alt: 'Logo Dra' })),
+            ...tarjetas.map(img => ({ src: `imagenes/diseño/identidad/Dra/Tarjeta/${img}`, alt: 'Tarjeta Dra' })),
+            ...flyers.map(img => ({ src: `imagenes/diseño/identidad/Dra/flyers/${img}`, alt: 'Flyer Dra' })),
+            ...mailing.map(img => ({ src: `imagenes/diseño/identidad/Dra/Mailing/${img}`, alt: 'Mailing Dra' })),
+            ...banners.map(img => ({ src: `imagenes/diseño/identidad/Dra/Banners/${img}`, alt: 'Banner Dra' }))
+        ];
+        setTimeout(() => {
+            document.querySelectorAll('.dra-img').forEach(img => {
+                img.onclick = function() {
+                    openModalDra(parseInt(img.getAttribute('data-dra-idx')));
+                };
+            });
+        }, 0);
     } else {
         html += `<h2 style='color:#fff;'>${identidad}</h2><p style='color:#fff;'>Próximamente contenido para esta identidad.</p>`;
     }
     gallery.innerHTML = html;
+}
+
+// Modal fullscreen para imágenes Dra con navegación
+function openModalDra(idx) {
+    const imgs = window.draImgs;
+    let modal = document.getElementById('img-modal-dra');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'img-modal-dra';
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100vw';
+        modal.style.height = '100vh';
+        modal.style.background = 'rgba(0,0,0,0.97)';
+        modal.style.display = 'flex';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.style.zIndex = '9999';
+        modal.innerHTML = `
+            <button id='dra-prev' style='position:absolute;left:2rem;top:50%;transform:translateY(-50%);background:none;border:none;font-size:3rem;color:#fff;cursor:pointer;z-index:10001;'>&lt;</button>
+            <img id='modal-img-dra' style='max-width:96vw;max-height:92vh;box-shadow:0 8px 32px 0 rgba(0,0,0,0.25);border-radius:0;display:block;'>
+            <button id='dra-next' style='position:absolute;right:2rem;top:50%;transform:translateY(-50%);background:none;border:none;font-size:3rem;color:#fff;cursor:pointer;z-index:10001;'>&gt;</button>
+            <span id='close-modal-dra' style='position:fixed;top:2rem;right:2rem;font-size:2.5rem;color:#fff;cursor:pointer;z-index:10001;'>&times;</span>`;
+        document.body.appendChild(modal);
+    }
+    function updateImg() {
+        document.getElementById('modal-img-dra').src = imgs[idx].src;
+        document.getElementById('modal-img-dra').alt = imgs[idx].alt;
+    }
+    updateImg();
+    modal.style.display = 'flex';
+    document.getElementById('close-modal-dra').onclick = function() {
+        modal.style.display = 'none';
+    };
+    document.getElementById('dra-prev').onclick = function(e) {
+        e.stopPropagation();
+        idx = (idx - 1 + imgs.length) % imgs.length;
+        updateImg();
+    };
+    document.getElementById('dra-next').onclick = function(e) {
+        e.stopPropagation();
+        idx = (idx + 1) % imgs.length;
+        updateImg();
+    };
+    modal.onclick = function(e) {
+        if (e.target === modal) modal.style.display = 'none';
+    };
 }
 
 function goToStyle(idx) {
