@@ -745,25 +745,51 @@ function goToStyle(idx) {
 window.onload = function() {
     const styleName = getQueryParam('style') || creativeStyles[0].name;
     renderGallery(styleName);
-    // Cerrar galería
     document.getElementById('close-gallery').onclick = function() {
         window.location.href = 'index.html';
     };
-    // Deshabilita flechas para diseño gráfico y desarrollo web
-    const onlyOne = ['ilustracion', 'identidad', 'otros'];
-    if (onlyOne.includes(styleName)) {
-        document.getElementById('prev-style').style.display = 'none';
-        document.getElementById('next-style').style.display = 'none';
-    } else {
-        // Flecha atrás
+    // Flechas solo para desarrollo web
+    const devWebNames = ['Nalion', 'zodiaco', 'zapateria', 'portfolio', 'playwright'];
+    if (devWebNames.includes(styleName)) {
+        document.getElementById('prev-style').style.display = '';
+        document.getElementById('next-style').style.display = '';
+        const idx = devWebNames.indexOf(styleName);
         document.getElementById('prev-style').onclick = function() {
-            const idx = creativeStyles.findIndex(s => s.name === styleName);
-            goToStyle((idx - 1 + creativeStyles.length) % creativeStyles.length);
+            goToStyle(devWebNames[(idx - 1 + devWebNames.length) % devWebNames.length]);
         };
-        // Flecha adelante
         document.getElementById('next-style').onclick = function() {
-            const idx = creativeStyles.findIndex(s => s.name === styleName);
-            goToStyle((idx + 1) % creativeStyles.length);
+            goToStyle(devWebNames[(idx + 1) % devWebNames.length]);
         };
+    } else {
+        // Deshabilita flechas para diseño gráfico y otros
+        const onlyOne = ['ilustracion', 'identidad', 'otros'];
+        if (onlyOne.includes(styleName)) {
+            document.getElementById('prev-style').style.display = 'none';
+            document.getElementById('next-style').style.display = 'none';
+        } else {
+            // Por defecto: ciclo entre todos los creativeStyles
+            document.getElementById('prev-style').style.display = '';
+            document.getElementById('next-style').style.display = '';
+            const idx = creativeStyles.findIndex(s => s.name === styleName);
+            document.getElementById('prev-style').onclick = function() {
+                goToStyle(creativeStyles[(idx - 1 + creativeStyles.length) % creativeStyles.length].name);
+            };
+            document.getElementById('next-style').onclick = function() {
+                goToStyle(creativeStyles[(idx + 1) % creativeStyles.length].name);
+            };
+        }
     }
 };
+
+// Cambia goToStyle para aceptar nombre además de índice
+function goToStyle(styleOrIdx) {
+    let style;
+    if (typeof styleOrIdx === 'string') {
+        style = creativeStyles.find(s => s.name === styleOrIdx);
+    } else {
+        style = creativeStyles[styleOrIdx];
+    }
+    if (style) {
+        window.location.href = `galeria_creativa.html?style=${encodeURIComponent(style.name)}`;
+    }
+}
