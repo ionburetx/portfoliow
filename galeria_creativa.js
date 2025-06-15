@@ -40,7 +40,7 @@ function renderGallery(styleName) {
         const identidadData = [
             {
                 name: 'Dra',
-                img: 'imagenes/diseño/identidad/Dra/logu/logo.jpg',
+                img: 'imagenes/diseño/identidad/Dra/logu/egur kolori.png',
                 label: 'Dra'
             },
             {
@@ -55,7 +55,7 @@ function renderGallery(styleName) {
             },
             {
                 name: '7Metropolis',
-                img: 'imagenes/diseño/identidad/7Metropolis/Logos/logo.jpg',
+                img: 'imagenes/diseño/identidad/7Metropolis/Logos/logo colaboraciones.png',
                 label: '7Metropolis'
             }
         ];
@@ -74,8 +74,8 @@ function renderGallery(styleName) {
         // Añadir funcionalidad clic para futuro modal/info
         document.querySelectorAll('.identidad-card').forEach(card => {
             card.onclick = function() {
-                // Aquí puedes abrir un modal o mostrar info específica de la identidad
-                alert('Próximamente: info de ' + card.getAttribute('data-identidad'));
+                const identidad = card.getAttribute('data-identidad');
+                renderIdentidadDetalle(identidad);
             };
         });
         return;
@@ -86,7 +86,7 @@ function renderGallery(styleName) {
             'banatorrela.jpg',
             'Bittore.png',
             'SAN ROKE FIN.jpg',
-            'Feria y olé.pdf',
+            'feria.jpg', // Cambiado a la ilustración del cartel de feria
         ];
         const cartelesHtml = `
             <h3 style="color:#fff;text-align:left;margin-bottom:1.2rem;">Carteles</h3>
@@ -420,6 +420,48 @@ function openModalPortfolio(idx) {
     modal.onclick = function(e) {
         if (e.target === modal) modal.style.display = 'none';
     };
+}
+
+// Nueva función para mostrar el detalle de cada identidad
+function renderIdentidadDetalle(identidad) {
+    const gallery = document.getElementById('gallery-cascade');
+    let html = `<button class="gallery-cascade-btn" style="margin-bottom:2rem;" onclick="renderGallery('identidad')">&larr; Volver</button>`;
+    if (identidad === 'Dra') {
+        html += `<h2 style='color:#fff;margin-bottom:1.5rem;'>Dra</h2>`;
+        // Banners
+        html += `<h3 style='color:#fff;margin:1.2rem 0 0.7rem;'>Banners</h3><div class='cascade-img-row'>`;
+        ["facebokprest.jpg","facebokprest2.jpg"].forEach(img => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Dra/Banners/${img}' class='cascade-img' alt='Banner Dra'></div>`;
+        });
+        html += `</div>`;
+        // Flyers
+        html += `<h3 style='color:#fff;margin:1.2rem 0 0.7rem;'>Flyers</h3><div class='cascade-img-row'>`;
+        ["HOTEL ADULT ANVERSO.jpg","HOTEL ADULT REVERSO2.jpg","HOTEL CHILD ANVERSO.jpg","HOTEL CHILD REVERSO 2.jpg"].forEach(img => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Dra/flyers/${img}' class='cascade-img' alt='Flyer Dra'></div>`;
+        });
+        html += `</div>`;
+        // Logotipos
+        html += `<h3 style='color:#fff;margin:1.2rem 0 0.7rem;'>Logotipos</h3><div class='cascade-img-row'>`;
+        ["azulejo1.png","azulejo5.png","drachild.png","drachildb.png","dradultb.png","dradultz.png","egur kolori.png","egurre4.png"].forEach(img => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Dra/logu/${img}' class='cascade-img' alt='Logo Dra'></div>`;
+        });
+        html += `</div>`;
+        // Mailing
+        html += `<h3 style='color:#fff;margin:1.2rem 0 0.7rem;'>Mailing</h3><div class='cascade-img-row'>`;
+        ["definitibu nagusi 2.jpg","definitibu txiki.jpg","dra!paris.jpg"].forEach(img => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Dra/Mailing/${img}' class='cascade-img' alt='Mailing Dra'></div>`;
+        });
+        html += `</div>`;
+        // Tarjetas
+        html += `<h3 style='color:#fff;margin:1.2rem 0 0.7rem;'>Tarjetas</h3><div class='cascade-img-row'>`;
+        ["tarjeti2.png","tarjeti3.png","tarjetiber.png","tarjetizb.png"].forEach(img => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Dra/Tarjeta/${img}' class='cascade-img' alt='Tarjeta Dra'></div>`;
+        });
+        html += `</div>`;
+    } else {
+        html += `<h2 style='color:#fff;'>${identidad}</h2><p style='color:#fff;'>Próximamente contenido para esta identidad.</p>`;
+    }
+    gallery.innerHTML = html;
 }
 
 function goToStyle(idx) {
