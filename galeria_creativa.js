@@ -506,10 +506,11 @@ function renderIdentidadDetalle(identidad) {
             'kresala 4 jpeg.jpg'
         ];
         html += `<div class='cascade-img-row'>`;
-        kresalaImgs.forEach(img => {
-            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/kresala/${img}' class='cascade-img' alt='Logo Kresala'></div>`;
+        kresalaImgs.forEach((img, idx) => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/kresala/${img}' class='cascade-img identidad-img' alt='Logo Kresala' data-identidad-idx='${idx}' data-identidad='Kresala'></div>`;
         });
         html += `</div>`;
+        window.KresalaImgs = kresalaImgs.map(img => ({ src: `imagenes/diseño/identidad/kresala/${img}`, alt: 'Logo Kresala' }));
     } else if (identidad === 'JCV/EGL') {
         html += `<h2 style='color:#fff;margin-bottom:1.5rem;'>Logos</h2>`;
         const logos = [
@@ -517,8 +518,8 @@ function renderIdentidadDetalle(identidad) {
             'Irribarre eginez.jpg'
         ];
         html += `<div class='cascade-img-row'>`;
-        logos.forEach(img => {
-            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/gaztea/${img}' class='cascade-img' alt='Logo JCV/EGL'></div>`;
+        logos.forEach((img, idx) => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/gaztea/${img}' class='cascade-img identidad-img' alt='Logo JCV/EGL' data-identidad-idx='${idx}' data-identidad='JCV/EGL'></div>`;
         });
         html += `</div>`;
         html += `<h2 style='color:#fff;margin:2rem 0 1.5rem;'>Merchandising</h2>`;
@@ -527,28 +528,43 @@ function renderIdentidadDetalle(identidad) {
             'kamiseta (Kooperatu).jpg'
         ];
         html += `<div class='cascade-img-row'>`;
-        merch.forEach(img => {
-            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/gaztea/${img}' class='cascade-img' alt='Merchandising JCV/EGL'></div>`;
+        merch.forEach((img, idx) => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/gaztea/${img}' class='cascade-img identidad-img' alt='Merchandising JCV/EGL' data-identidad-idx='${logos.length+idx}' data-identidad='JCV/EGL'></div>`;
         });
         html += `</div>`;
+        window['JCV/EGLImgs'] = [
+            ...logos.map(img => ({ src: `imagenes/diseño/identidad/gaztea/${img}`, alt: 'Logo JCV/EGL' })),
+            ...merch.map(img => ({ src: `imagenes/diseño/identidad/gaztea/${img}`, alt: 'Merchandising JCV/EGL' }))
+        ];
     } else if (identidad === 'Codigo') {
         html += `<h2 style='color:#fff;margin-bottom:1.5rem;'>Logo</h2>`;
-        html += `<div class='cascade-img-row'><div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Codigo/codigo logo.jpg' class='cascade-img' alt='Logo Codigo'></div></div>`;
+        html += `<div class='cascade-img-row'><div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Codigo/codigo logo.jpg' class='cascade-img identidad-img' alt='Logo Codigo' data-identidad-idx='0' data-identidad='Codigo'></div></div>`;
         html += `<h2 style='color:#fff;margin:2rem 0 1.5rem;'>Papelería</h2>`;
-        html += `<div class='cascade-img-row'><div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Codigo/codigo papeleria.jpg' class='cascade-img' alt='Papelería Codigo'></div></div>`;
+        html += `<div class='cascade-img-row'><div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Codigo/codigo papeleria.jpg' class='cascade-img identidad-img' alt='Papelería Codigo' data-identidad-idx='1' data-identidad='Codigo'></div></div>`;
+        window.CodigoImgs = [
+            { src: 'imagenes/diseño/identidad/Codigo/codigo logo.jpg', alt: 'Logo Codigo' },
+            { src: 'imagenes/diseño/identidad/Codigo/codigo papeleria.jpg', alt: 'Papelería Codigo' }
+        ];
     } else if (identidad === 'Constone') {
         html += `<h2 style='color:#fff;margin-bottom:1.5rem;'>Logo</h2>`;
-        html += `<div class='cascade-img-row'><div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Constone/constone logo.jpg' class='cascade-img' alt='Logo Constone'></div></div>`;
+        html += `<div class='cascade-img-row'><div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Constone/constone logo.jpg' class='cascade-img identidad-img' alt='Logo Constone' data-identidad-idx='0' data-identidad='Constone'></div></div>`;
         html += `<h2 style='color:#fff;margin:2rem 0 1.5rem;'>Papelería</h2>`;
         html += `<div class='cascade-img-row'>`;
-        html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Constone/constone papeleria.jpg' class='cascade-img' alt='Papelería Constone'></div>`;
-        html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Constone/constone papeleria2.jpg' class='cascade-img' alt='Papelería Constone 2'></div>`;
+        html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Constone/constone papeleria.jpg' class='cascade-img identidad-img' alt='Papelería Constone' data-identidad-idx='1' data-identidad='Constone'></div>`;
+        html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Constone/constone papeleria2.jpg' class='cascade-img identidad-img' alt='Papelería Constone 2' data-identidad-idx='2' data-identidad='Constone'></div>`;
         html += `</div>`;
         html += `<h2 style='color:#fff;margin:2rem 0 1.5rem;'>Merchandising</h2>`;
         html += `<div class='cascade-img-row'>`;
-        html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Constone/constone camiseta.jpg' class='cascade-img' alt='Camiseta Constone'></div>`;
-        html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Constone/constone vehiculo.jpg' class='cascade-img' alt='Vehículo Constone'></div>`;
+        html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Constone/constone camiseta.jpg' class='cascade-img identidad-img' alt='Camiseta Constone' data-identidad-idx='3' data-identidad='Constone'></div>`;
+        html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Constone/constone vehiculo.jpg' class='cascade-img identidad-img' alt='Vehículo Constone' data-identidad-idx='4' data-identidad='Constone'></div>`;
         html += `</div>`;
+        window.ConstoneImgs = [
+            { src: 'imagenes/diseño/identidad/Constone/constone logo.jpg', alt: 'Logo Constone' },
+            { src: 'imagenes/diseño/identidad/Constone/constone papeleria.jpg', alt: 'Papelería Constone' },
+            { src: 'imagenes/diseño/identidad/Constone/constone papeleria2.jpg', alt: 'Papelería Constone 2' },
+            { src: 'imagenes/diseño/identidad/Constone/constone camiseta.jpg', alt: 'Camiseta Constone' },
+            { src: 'imagenes/diseño/identidad/Constone/constone vehiculo.jpg', alt: 'Vehículo Constone' }
+        ];
     } else if (identidad === '7Metropolis') {
         html += `<h2 style='color:#fff;margin-bottom:1.5rem;'>Logos</h2>`;
         const logos = [
@@ -558,8 +574,8 @@ function renderIdentidadDetalle(identidad) {
             'logocircular2.png'
         ];
         html += `<div class='cascade-img-row'>`;
-        logos.forEach(img => {
-            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/7Metropolis/Logos/${img}' class='cascade-img' alt='Logo 7Metropolis'></div>`;
+        logos.forEach((img, idx) => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/7Metropolis/Logos/${img}' class='cascade-img identidad-img' alt='Logo 7Metropolis' data-identidad-idx='${idx}' data-identidad='7Metropolis'></div>`;
         });
         html += `</div>`;
         html += `<h2 style='color:#fff;margin:2rem 0 1.5rem;'>Posavasos</h2>`;
@@ -573,8 +589,8 @@ function renderIdentidadDetalle(identidad) {
             'posavasos trasero.jpg'
         ];
         html += `<div class='cascade-img-row'>`;
-        posavasos.forEach(img => {
-            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/7Metropolis/Posavasos/${img}' class='cascade-img' alt='Posavasos 7Metropolis'></div>`;
+        posavasos.forEach((img, idx) => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/7Metropolis/Posavasos/${img}' class='cascade-img identidad-img' alt='Posavasos 7Metropolis' data-identidad-idx='${logos.length+idx}' data-identidad='7Metropolis'></div>`;
         });
         html += `</div>`;
         html += `<h2 style='color:#fff;margin:2rem 0 1.5rem;'>Etiquetas</h2>`;
@@ -583,8 +599,8 @@ function renderIdentidadDetalle(identidad) {
             'etiquetas vino.png'
         ];
         html += `<div class='cascade-img-row'>`;
-        etiquetas.forEach(img => {
-            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/7Metropolis/Etiquetas/${img}' class='cascade-img' alt='Etiqueta 7Metropolis'></div>`;
+        etiquetas.forEach((img, idx) => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/7Metropolis/Etiquetas/${img}' class='cascade-img identidad-img' alt='Etiqueta 7Metropolis' data-identidad-idx='${logos.length+posavasos.length+idx}' data-identidad='7Metropolis'></div>`;
         });
         html += `</div>`;
         html += `<h2 style='color:#fff;margin:2rem 0 1.5rem;'>Coasters</h2>`;
@@ -595,8 +611,8 @@ function renderIdentidadDetalle(identidad) {
             'coaster4.jpg'
         ];
         html += `<div class='cascade-img-row'>`;
-        coasters.forEach(img => {
-            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/7Metropolis/Coasters/${img}' class='cascade-img' alt='Coaster 7Metropolis'></div>`;
+        coasters.forEach((img, idx) => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/7Metropolis/Coasters/${img}' class='cascade-img identidad-img' alt='Coaster 7Metropolis' data-identidad-idx='${logos.length+posavasos.length+etiquetas.length+idx}' data-identidad='7Metropolis'></div>`;
         });
         html += `</div>`;
         html += `<h2 style='color:#fff;margin:2rem 0 1.5rem;'>Tarjetas</h2>`;
@@ -606,23 +622,43 @@ function renderIdentidadDetalle(identidad) {
             'tarjeta trasera1.jpg'
         ];
         html += `<div class='cascade-img-row'>`;
-        tarjetas.forEach(img => {
-            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/7Metropolis/Tarjetas/${img}' class='cascade-img' alt='Tarjeta 7Metropolis'></div>`;
+        tarjetas.forEach((img, idx) => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/7Metropolis/Tarjetas/${img}' class='cascade-img identidad-img' alt='Tarjeta 7Metropolis' data-identidad-idx='${logos.length+posavasos.length+etiquetas.length+coasters.length+idx}' data-identidad='7Metropolis'></div>`;
         });
         html += `</div>`;
+        window['7MetropolisImgs'] = [
+            ...logos.map(img => ({ src: `imagenes/diseño/identidad/7Metropolis/Logos/${img}`, alt: 'Logo 7Metropolis' })),
+            ...posavasos.map(img => ({ src: `imagenes/diseño/identidad/7Metropolis/Posavasos/${img}`, alt: 'Posavasos 7Metropolis' })),
+            ...etiquetas.map(img => ({ src: `imagenes/diseño/identidad/7Metropolis/Etiquetas/${img}`, alt: 'Etiqueta 7Metropolis' })),
+            ...coasters.map(img => ({ src: `imagenes/diseño/identidad/7Metropolis/Coasters/${img}`, alt: 'Coaster 7Metropolis' })),
+            ...tarjetas.map(img => ({ src: `imagenes/diseño/identidad/7Metropolis/Tarjetas/${img}`, alt: 'Tarjeta 7Metropolis' }))
+        ];
     } else {
         html += `<h2 style='color:#fff;'>${identidad}</h2><p style='color:#fff;'>Próximamente contenido para esta identidad.</p>`;
     }
     gallery.innerHTML = html;
+    // Asignar evento onclick a todas las imágenes de identidad (excepto Dra)
+    if (['Kresala','JCV/EGL','Codigo','Constone','7Metropolis'].includes(identidad)) {
+        setTimeout(() => {
+            document.querySelectorAll('.identidad-img').forEach(img => {
+                img.onclick = function() {
+                    const idx = parseInt(img.getAttribute('data-identidad-idx'));
+                    const identidad = img.getAttribute('data-identidad');
+                    openModalIdentidad(idx, identidad);
+                };
+            });
+        }, 0);
+    }
 }
 
-// Modal fullscreen para imágenes Dra con navegación
-function openModalDra(idx) {
-    const imgs = window.draImgs;
-    let modal = document.getElementById('img-modal-dra');
+// Modal fullscreen para imágenes de Identidad (excepto Dra) con navegación
+function openModalIdentidad(idx, identidad) {
+    const imgs = window[identidad + 'Imgs'] || window[identidad.replace('/', '') + 'Imgs'];
+    if (!imgs || !imgs.length) return;
+    let modal = document.getElementById('img-modal-identidad');
     if (!modal) {
         modal = document.createElement('div');
-        modal.id = 'img-modal-dra';
+        modal.id = 'img-modal-identidad';
         modal.style.position = 'fixed';
         modal.style.top = '0';
         modal.style.left = '0';
@@ -634,27 +670,27 @@ function openModalDra(idx) {
         modal.style.justifyContent = 'center';
         modal.style.zIndex = '9999';
         modal.innerHTML = `
-            <button id='dra-prev' style='position:absolute;left:2rem;top:50%;transform:translateY(-50%);background:none;border:none;font-size:3rem;color:#fff;cursor:pointer;z-index:10001;'>&lt;</button>
-            <img id='modal-img-dra' style='max-width:96vw;max-height:92vh;box-shadow:0 8px 32px 0 rgba(0,0,0,0.25);border-radius:0;display:block;'>
-            <button id='dra-next' style='position:absolute;right:2rem;top:50%;transform:translateY(-50%);background:none;border:none;font-size:3rem;color:#fff;cursor:pointer;z-index:10001;'>&gt;</button>
-            <span id='close-modal-dra' style='position:fixed;top:2rem;right:2rem;font-size:2.5rem;color:#fff;cursor:pointer;z-index:10001;'>&times;</span>`;
+            <button id='identidad-prev' style='position:absolute;left:2rem;top:50%;transform:translateY(-50%);background:none;border:none;font-size:3rem;color:#fff;cursor:pointer;z-index:10001;'>&lt;</button>
+            <img id='modal-img-identidad' style='max-width:96vw;max-height:92vh;box-shadow:0 8px 32px 0 rgba(0,0,0,0.25);border-radius:0;display:block;'>
+            <button id='identidad-next' style='position:absolute;right:2rem;top:50%;transform:translateY(-50%);background:none;border:none;font-size:3rem;color:#fff;cursor:pointer;z-index:10001;'>&gt;</button>
+            <span id='close-modal-identidad' style='position:fixed;top:2rem;right:2rem;font-size:2.5rem;color:#fff;cursor:pointer;z-index:10001;'>&times;</span>`;
         document.body.appendChild(modal);
     }
     function updateImg() {
-        document.getElementById('modal-img-dra').src = imgs[idx].src;
-        document.getElementById('modal-img-dra').alt = imgs[idx].alt;
+        document.getElementById('modal-img-identidad').src = imgs[idx].src;
+        document.getElementById('modal-img-identidad').alt = imgs[idx].alt;
     }
     updateImg();
     modal.style.display = 'flex';
-    document.getElementById('close-modal-dra').onclick = function() {
+    document.getElementById('close-modal-identidad').onclick = function() {
         modal.style.display = 'none';
     };
-    document.getElementById('dra-prev').onclick = function(e) {
+    document.getElementById('identidad-prev').onclick = function(e) {
         e.stopPropagation();
         idx = (idx - 1 + imgs.length) % imgs.length;
         updateImg();
     };
-    document.getElementById('dra-next').onclick = function(e) {
+    document.getElementById('identidad-next').onclick = function(e) {
         e.stopPropagation();
         idx = (idx + 1) % imgs.length;
         updateImg();
