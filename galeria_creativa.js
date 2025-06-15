@@ -497,6 +497,119 @@ function renderIdentidadDetalle(identidad) {
                 };
             });
         }, 0);
+    } else if (identidad === 'Kresala') {
+        html += `<h2 style='color:#fff;margin-bottom:1.5rem;'>Logo</h2>`;
+        const kresalaImgs = [
+            'kresala 1 negatibo.jpg',
+            'kresala 2 negatibo.jpg',
+            'kresala 2.png',
+            'kresala 4 jpeg.jpg'
+        ];
+        html += `<div class='cascade-img-row'>`;
+        kresalaImgs.forEach(img => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/kresala/${img}' class='cascade-img' alt='Logo Kresala'></div>`;
+        });
+        html += `</div>`;
+    } else if (identidad === 'JCV/EGL') {
+        html += `<h2 style='color:#fff;margin-bottom:1.5rem;'>Logos</h2>`;
+        const logos = [
+            'kooperatu.jpg',
+            'Irribarre eginez.jpg'
+        ];
+        html += `<div class='cascade-img-row'>`;
+        logos.forEach(img => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/gaztea/${img}' class='cascade-img' alt='Logo JCV/EGL'></div>`;
+        });
+        html += `</div>`;
+        html += `<h2 style='color:#fff;margin:2rem 0 1.5rem;'>Merchandising</h2>`;
+        const merch = [
+            'kamiseta (irribarre eginez).jpg',
+            'kamiseta (Kooperatu).jpg'
+        ];
+        html += `<div class='cascade-img-row'>`;
+        merch.forEach(img => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/gaztea/${img}' class='cascade-img' alt='Merchandising JCV/EGL'></div>`;
+        });
+        html += `</div>`;
+    } else if (identidad === 'Codigo') {
+        html += `<h2 style='color:#fff;margin-bottom:1.5rem;'>Logo</h2>`;
+        html += `<div class='cascade-img-row'><div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Codigo/codigo logo.jpg' class='cascade-img' alt='Logo Codigo'></div></div>`;
+        html += `<h2 style='color:#fff;margin:2rem 0 1.5rem;'>Papelería</h2>`;
+        html += `<div class='cascade-img-row'><div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Codigo/codigo papeleria.jpg' class='cascade-img' alt='Papelería Codigo'></div></div>`;
+    } else if (identidad === 'Constone') {
+        html += `<h2 style='color:#fff;margin-bottom:1.5rem;'>Logo</h2>`;
+        html += `<div class='cascade-img-row'><div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Constone/constone logo.jpg' class='cascade-img' alt='Logo Constone'></div></div>`;
+        html += `<h2 style='color:#fff;margin:2rem 0 1.5rem;'>Papelería</h2>`;
+        html += `<div class='cascade-img-row'>`;
+        html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Constone/constone papeleria.jpg' class='cascade-img' alt='Papelería Constone'></div>`;
+        html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Constone/constone papeleria2.jpg' class='cascade-img' alt='Papelería Constone 2'></div>`;
+        html += `</div>`;
+        html += `<h2 style='color:#fff;margin:2rem 0 1.5rem;'>Merchandising</h2>`;
+        html += `<div class='cascade-img-row'>`;
+        html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Constone/constone camiseta.jpg' class='cascade-img' alt='Camiseta Constone'></div>`;
+        html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/Constone/constone vehiculo.jpg' class='cascade-img' alt='Vehículo Constone'></div>`;
+        html += `</div>`;
+    } else if (identidad === '7Metropolis') {
+        html += `<h2 style='color:#fff;margin-bottom:1.5rem;'>Logos</h2>`;
+        const logos = [
+            'logo.jpg',
+            'logo colaboraciones.png',
+            'logocircular1.png',
+            'logocircular2.png'
+        ];
+        html += `<div class='cascade-img-row'>`;
+        logos.forEach(img => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/7Metropolis/Logos/${img}' class='cascade-img' alt='Logo 7Metropolis'></div>`;
+        });
+        html += `</div>`;
+        html += `<h2 style='color:#fff;margin:2rem 0 1.5rem;'>Posavasos</h2>`;
+        const posavasos = [
+            'c.png',
+            'menu american ugly.png',
+            'menu black bear.png',
+            'menu horacio barbato.png',
+            'menu osaki.png',
+            'posavasos frontal.jpg',
+            'posavasos trasero.jpg'
+        ];
+        html += `<div class='cascade-img-row'>`;
+        posavasos.forEach(img => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/7Metropolis/Posavasos/${img}' class='cascade-img' alt='Posavasos 7Metropolis'></div>`;
+        });
+        html += `</div>`;
+        html += `<h2 style='color:#fff;margin:2rem 0 1.5rem;'>Etiquetas</h2>`;
+        const etiquetas = [
+            'etiqueta vino.jpg',
+            'etiquetas vino.png'
+        ];
+        html += `<div class='cascade-img-row'>`;
+        etiquetas.forEach(img => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/7Metropolis/Etiquetas/${img}' class='cascade-img' alt='Etiqueta 7Metropolis'></div>`;
+        });
+        html += `</div>`;
+        html += `<h2 style='color:#fff;margin:2rem 0 1.5rem;'>Coasters</h2>`;
+        const coasters = [
+            'coaster1.jpg',
+            'coaster2.jpg',
+            'coaster3.jpg',
+            'coaster4.jpg'
+        ];
+        html += `<div class='cascade-img-row'>`;
+        coasters.forEach(img => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/7Metropolis/Coasters/${img}' class='cascade-img' alt='Coaster 7Metropolis'></div>`;
+        });
+        html += `</div>`;
+        html += `<h2 style='color:#fff;margin:2rem 0 1.5rem;'>Tarjetas</h2>`;
+        const tarjetas = [
+            'tarjeta 3d.png',
+            'tarjeta frontal.jpg',
+            'tarjeta trasera1.jpg'
+        ];
+        html += `<div class='cascade-img-row'>`;
+        tarjetas.forEach(img => {
+            html += `<div class='cascade-img-wrap'><img src='imagenes/diseño/identidad/7Metropolis/Tarjetas/${img}' class='cascade-img' alt='Tarjeta 7Metropolis'></div>`;
+        });
+        html += `</div>`;
     } else {
         html += `<h2 style='color:#fff;'>${identidad}</h2><p style='color:#fff;'>Próximamente contenido para esta identidad.</p>`;
     }
