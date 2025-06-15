@@ -1,0 +1,552 @@
+:root {
+    --accent: #FF6B35;
+    --glass: rgba(255,255,255,0.7);
+    --glass-blur: 18px;
+    --text: #23272f;
+    --gray: #e0e0e0;
+    --shadow: 0 8px 32px 0 rgba(31,38,135,0.12);
+}
+
+body {
+  background-image: url('./imagenes/fondomain.jpg') !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  /* El blur solo al fondo, no al contenido */
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: -1;
+  background: inherit;
+  filter: blur(3px);
+  pointer-events: none;
+}
+
+html {
+    min-height: 100vh;
+}
+
+body::before {
+    display: none !important;
+}
+
+.header,
+.section,
+.category-content,
+#trabajos.section,
+.creative-styles-grid,
+.photo-styles-grid,
+.creative-style-card,
+.photo-style-card,
+.glass,
+.projects-grid,
+.gallery,
+.gallery-item,
+.project-card {
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    padding: 0.5rem 0.5rem; /* Reducido para header más estrecho */
+    background: transparent !important;
+    backdrop-filter: none !important;
+    z-index: 1000;
+    box-shadow: none;
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-end; /* Navbar alineado a la derecha */
+    gap: 2.5rem;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    background: transparent !important;
+    transition: color 0.2s, background 0.2s;
+    position: relative;
+    border: none;
+}
+.nav-link.active, .nav-link:hover {
+    color: var(--accent);
+    background: transparent !important;
+}
+
+.section {
+    padding: 7rem 2rem 3rem;
+    min-height: 100vh;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: none !important;
+}
+
+.glass {
+    background: var(--glass);
+    backdrop-filter: blur(var(--glass-blur));
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+}
+
+/* Elimina o comenta los estilos de category-tabs, tab-btn, subcategory-tabs, sub-tab si ya no existen en el HTML */
+
+.category-content {
+    display: none;
+    padding: 2.5rem 2rem 2rem;
+    margin-bottom: 2rem;
+    animation: fadeIn 0.7s;
+}
+.category-content.active {
+    display: block;
+}
+
+.sub-content {
+    display: none;
+    animation: fadeIn 0.7s;
+}
+.sub-content.active {
+    display: block;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    margin: 0 auto;
+}
+
+.project-card {
+    position: relative;
+    background: var(--glass);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+}
+.project-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 32px 0 rgba(255,107,53,0.13);
+}
+.project-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    transition: filter 0.3s;
+}
+.project-card:hover .project-img {
+    filter: brightness(0.92) blur(1px);
+}
+.project-overlay {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    background: linear-gradient(0deg, rgba(255,107,53,0.92) 0%, rgba(255,255,255,0.0) 100%);
+    color: #fff;
+    padding: 1.2rem 1rem 1.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    border-radius: 0 0 18px 18px;
+}
+.project-card:hover .project-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+.project-overlay h3 {
+    font-size: 1.2rem;
+    font-weight: 900;
+    margin-bottom: 0.3rem;
+}
+.project-overlay p {
+    font-size: 0.98rem;
+    margin-bottom: 0.7rem;
+}
+.view-btn {
+    background: #fff;
+    color: var(--accent);
+    border: none;
+    border-radius: 8px;
+    padding: 0.4rem 1.2rem;
+    font-weight: 600;
+    font-size: 0.98rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px 0 rgba(255,107,53,0.10);
+    transition: background 0.2s, color 0.2s;
+}
+.view-btn:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+/* Galería Fotografía */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin: 0 auto;
+}
+.gallery-item {
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    position: relative;
+    background: var(--glass);
+    transition: transform 0.2s;
+}
+.gallery-item:hover {
+    transform: scale(1.04);
+}
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.3s, transform 0.3s;
+}
+.gallery-item:hover .gallery-img {
+    filter: brightness(0.92) blur(1px);
+    transform: scale(1.07);
+}
+
+.fullscreen-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0; width: 100vw; height: 100vh;
+    background: rgba(30,32,38,0.92);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.fullscreen-modal.active {
+    display: flex;
+}
+.modal-img {
+    max-width: 90vw;
+    max-height: 80vh;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 rgba(255,107,53,0.18);
+}
+.close-modal {
+    color: #fff;
+    font-size: 2.5rem;
+    position: absolute;
+    top: 2rem;
+    right: 3rem;
+    cursor: pointer;
+    z-index: 10001;
+    transition: color 0.2s;
+}
+.close-modal:hover {
+    color: var(--accent);
+}
+
+/* Sobre mí */
+.about-container {
+    display: flex;
+    gap: 3.5rem;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 0;
+}
+.profile-img {
+    width: 260px;
+    height: 340px;
+    object-fit: cover;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px 0 rgba(31,38,135,0.13);
+    background: #fff;
+}
+.profile-img.no-crop {
+    object-fit: contain !important;
+    width: 260px;
+    height: 340px;
+    background: none !important;
+    box-shadow: none !important;
+    border-radius: 24px;
+    display: block;
+}
+.square-img {
+    aspect-ratio: 1/1 !important;
+    width: 100%;
+    height: auto;
+    object-fit: cover !important;
+    border-radius: 18px !important;
+    background: #18191c;
+    display: block;
+}
+.about-text {
+    flex: 1;
+    font-size: 1.15rem;
+    color: #fff;
+    background: none;
+    padding: 0 1rem;
+    max-width: 420px;
+    word-break: break-word;
+}
+.about-text h2 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    margin-bottom: 1.2rem;
+    color: var(--accent);
+}
+#sobre-mi.section {
+    background: url('./imagenes/fondobio.png') center/cover no-repeat fixed;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(6px) !important;
+    padding-bottom: 2.5rem !important;
+    margin-bottom: 0 !important;
+}
+
+/* Estilos Fotográficos */
+.photo-styles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin: 0 auto;
+    padding: 1.5rem 0;
+}
+.photo-style-card {
+    aspect-ratio: 1/1 !important;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    position: relative;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    overflow: hidden;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.22s, box-shadow 0.22s;
+}
+.photo-style-card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 8px 32px 0 rgba(255,107,53,0.13);
+}
+.photo-style-img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1/1 !important;
+    object-fit: cover !important;
+    border-radius: 0 !important;
+    display: block;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 1;
+    transition: filter 0.3s, transform 0.3s;
+}
+.photo-style-card:hover .photo-style-img {
+    filter: brightness(0.92) blur(1px);
+}
+.card-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(10,10,10,0.55);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    transition: background 0.3s;
+}
+.photo-style-card h3,
+.creative-style-card h3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-align: center;
+    margin: 0;
+    letter-spacing: 0.01em;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    pointer-events: none;
+    width: 90%;
+}
+
+/* Cards de desarrollo web y diseño gráfico igual que fotografía */
+.creative-style-card {
+    aspect-ratio: 1/1 !important;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    position: relative;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    overflow: hidden;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.22s, box-shadow 0.22s;
+}
+
+.creative-styles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin: 0 auto;
+    padding: 1.5rem 0;
+    max-width: 100%;
+}
+
+.creative-style-img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1/1 !important;
+    object-fit: cover !important;
+    border-radius: 0 !important;
+    display: block;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 1;
+    transition: filter 0.3s, transform 0.3s;
+}
+
+.creative-style-card h3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-align: center;
+    margin: 0;
+    letter-spacing: 0.01em;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    pointer-events: none;
+    width: 90%;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(10,10,10,0.55);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    transition: background 0.3s;
+}
+
+.creative-style-card:hover .creative-style-img {
+    filter: brightness(0.7) blur(1px);
+    transform: scale(1.04);
+}
+
+.creative-style-card:hover .card-overlay {
+    background: rgba(10,10,10,0.7);
+}
+
+/* Oculta la flecha cuando se ve la sección fotografía */
+body.foto-active .scroll-down-arrow {
+    display: none !important;
+}
+
+/* Animaciones */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+}
+.visible {
+    opacity: 1;
+    transform: none;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: none; }
+}
+
+/* Flecha animada scroll */
+.scroll-down-arrow {
+    position: fixed;
+    left: 50%;
+    bottom: 32px;
+    transform: translateX(-50%);
+    z-index: 1200;
+    animation: bounceDown 1.3s infinite;
+    font-size: 2.5rem;
+    color: #fff;
+    opacity: 0.85;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.18));
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.scroll-down-arrow:hover {
+    color: var(--accent);
+}
+@keyframes bounceDown {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(18px); }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .about-container {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 1.5rem 0;
+    }
+    .profile-img {
+        width: 100%;
+        height: 260px;
+    }
+}
+@media (max-width: 600px) {
+    .section {
+        padding: 5rem 0.5rem 2rem;
+    }
+    .category-tabs {
+        flex-direction: column;
+        gap: 0.7rem;
+    }
+    .projects-grid, .gallery {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    .about-text h2 {
+        font-size: 1.4rem;
+    }
+}
+
+/* Imagen fondo para la sección trabajos */
+#trabajos.section {
+  background: url('./imagenes/fondo.jpg') center top no-repeat;
+  background-size: 100vw auto;
+  margin-top: 0;
+  padding-top: 0;
+}

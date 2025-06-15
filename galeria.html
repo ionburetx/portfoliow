@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería Fotográfica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;700;900&display=swap');
+        body {
+            background: none !important;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            z-index: 0;
+            inset: 0;
+            background: url('./imagenes/fondomain.jpg') center/cover no-repeat;
+            filter: blur(12px) brightness(0.85);
+            opacity: 1;
+            pointer-events: none;
+        }
+        .gallery-cascade-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 1rem 2rem;
+        }
+        .gallery-cascade-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 0;
+            background: transparent !important;
+            z-index: 200;
+            padding: 1.2rem 0 1.2rem 0;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            border-radius: 18px;
+        }
+        .gallery-cascade-title {
+            color: #fff !important;
+            font-size: 2.2rem;
+            font-family: 'Sora', 'Inter', sans-serif;
+            font-weight: 900;
+            letter-spacing: 0.02em;
+            text-shadow: 0 2px 16px rgba(0,0,0,0.18);
+        }
+        .gallery-cascade-nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        .gallery-cascade-btn, .gallery-cascade-close {
+            background: none !important;
+            border: none;
+            color: #fff;
+            font-size: 2.2rem;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: none !important;
+            transition: color 0.2s, transform 0.2s;
+        }
+        .gallery-cascade-btn:hover, .gallery-cascade-close:hover {
+            color: var(--accent);
+            background: none !important;
+            transform: scale(1.08);
+        }
+        .gallery-cascade-container #gallery-cascade {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+        .cascade-img-wrap {
+            width: 100%;
+            aspect-ratio: unset !important;
+            border-radius: 0;
+            overflow: hidden;
+            background: transparent !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: none !important;
+        }
+        .cascade-img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            max-height: 60vh;
+            object-fit: contain !important;
+            border-radius: 0;
+            background: transparent !important;
+            display: block;
+            position: relative;
+            box-shadow: none !important;
+        }
+        .cascade-img-wrap:hover {
+            transform: translateY(-8px) scale(1.03) rotate(-1deg);
+            box-shadow: 0 12px 36px 0 rgba(255,107,53,0.22);
+        }
+        .cascade-img-wrap:hover .cascade-img {
+            filter: brightness(0.95) blur(1px) drop-shadow(0 4px 24px rgba(255,107,53,0.13));
+            transform: scale(1.04) rotate(1deg);
+        }
+        @media (max-width: 700px) {
+            .gallery-cascade-title { font-size: 1.2rem; }
+            .gallery-cascade-header { flex-direction: column; gap: 1rem; }
+            #gallery-cascade { grid-template-columns: 1fr; }
+        }
+        .gallery-cascade-close {
+            position: fixed;
+            left: auto;
+            right: 2rem;
+            top: 2rem;
+            bottom: auto;
+            transform: none;
+            z-index: 300;
+            align-self: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-cascade-container">
+        <button id="close-gallery" class="gallery-cascade-close">&times;</button>
+        <div class="gallery-cascade-header">
+            <button id="prev-style" class="gallery-cascade-btn" title="Anterior">&#8592;</button>
+            <span id="gallery-title" class="gallery-cascade-title"></span>
+            <button id="next-style" class="gallery-cascade-btn" title="Siguiente">&#8594;</button>
+        </div>
+        <div id="gallery-cascade"></div>
+    </div>
+    <script src="galeria.js"></script>
+</body>
+</html>
