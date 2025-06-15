@@ -516,9 +516,10 @@ function renderIdentidadDetalle(identidad) {
         ];
         setTimeout(() => {
             document.querySelectorAll('.dra-img').forEach(img => {
-                img.onclick = function() {
+                img.addEventListener('click', function(e) {
+                    e.stopPropagation();
                     openModalDra(parseInt(img.getAttribute('data-dra-idx')));
-                };
+                });
             });
         }, 0);
     } else if (identidad === 'Kresala') {
@@ -662,7 +663,18 @@ function renderIdentidadDetalle(identidad) {
     }
     gallery.innerHTML = html;
     // Asignar evento onclick a todas las imágenes de identidad (excepto Dra)
-    if (['Kresala','JCV/EGL','Codigo','Constone','7Metropolis'].includes(identidad)) {
+    if (identidad === 'Dra') {
+        window.DraImgs = window.draImgs;
+        setTimeout(() => {
+            document.querySelectorAll('.dra-img').forEach(img => {
+                img.onclick = function(e) {
+                    e.stopPropagation();
+                    const idx = parseInt(img.getAttribute('data-dra-idx'));
+                    openModalIdentidad(idx, 'Dra');
+                };
+            });
+        }, 0);
+    } else if (['Kresala','JCV/EGL','Codigo','Constone','7Metropolis'].includes(identidad)) {
         setTimeout(() => {
             document.querySelectorAll('.identidad-img').forEach(img => {
                 img.onclick = function() {
@@ -675,7 +687,7 @@ function renderIdentidadDetalle(identidad) {
     }
 }
 
-// Modal fullscreen para imágenes de Identidad (excepto Dra) con navegación
+// Modal fullscreen para imágenes de Identidad (incluido Dra) con navegación
 function openModalIdentidad(idx, identidad) {
     const imgs = window[identidad + 'Imgs'] || window[identidad.replace('/', '') + 'Imgs'];
     if (!imgs || !imgs.length) return;
