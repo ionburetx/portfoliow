@@ -1,10 +1,14 @@
 :root {
-    --accent: #FF6B35;
+    --accent: #bedef3;
     --glass: rgba(255,255,255,0.7);
     --glass-blur: 18px;
     --text: #23272f;
     --gray: #e0e0e0;
     --shadow: 0 8px 32px 0 rgba(31,38,135,0.12);
+}
+
+body, html {
+    font-family: 'Inter', 'Montserrat', 'Segoe UI', Arial, sans-serif;
 }
 
 body {
@@ -54,6 +58,7 @@ body::before {
     background: transparent !important;
     box-shadow: none !important;
     backdrop-filter: none !important;
+    font-family: inherit;
 }
 
 .header {
@@ -78,7 +83,7 @@ body::before {
 
 .nav-link {
     text-decoration: none;
-    color: #fff;
+    color: #fff !important;
     font-weight: 600;
     font-size: 1.1rem;
     letter-spacing: 0.02em;
@@ -90,7 +95,7 @@ body::before {
     border: none;
 }
 .nav-link.active, .nav-link:hover {
-    color: var(--accent);
+    color: #fff !important;
     background: transparent !important;
 }
 
@@ -540,6 +545,29 @@ body.foto-active .scroll-down-arrow {
     display: none;
 }
 
+/* Títulos principales en mayúsculas, naranja y grandes */
+#sobre-mi .about-text h2,
+#trabajos.section h1 {
+    text-transform: uppercase;
+    color: #1A2238;
+    letter-spacing: 0.04em;
+    font-size: 2.6rem;
+}
+
+/* Títulos de sección en mayúsculas y blanco */
+#trabajos.section h2 {
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 0.01em;
+    font-size: 1.6rem;
+}
+
+/* Ajuste para evitar herencia no deseada en otros h2 */
+#trabajos.section h2:not([style*="color:#fff"]) {
+    color: #fff !important;
+    text-transform: lowercase !important;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
     .about-container {
@@ -575,4 +603,24 @@ body.foto-active .scroll-down-arrow {
   background-size: 100vw auto;
   margin-top: 0;
   padding-top: 0;
+}
+
+/* Efecto de overlay y blur solo para la galería fotográfica */
+body.galeria-foto-bg::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: -1;
+  background: inherit;
+  filter: blur(3px);
+  pointer-events: none;
+  display: block !important;
+}
+body.galeria-foto-bg::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 0;
+  background: rgba(20,22,30,0.55); /* Overlay oscuro solo para galeria */
+  pointer-events: none;
 }

@@ -4,22 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galería Fotográfica</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;700;900&display=swap');
         body {
-            background: none !important;
+            background: url('./imagenes/fondo.jpg') center center / contain no-repeat fixed !important;
+            min-height: 100vh;
         }
         body::before {
-            content: '';
-            position: fixed;
-            z-index: 0;
-            inset: 0;
-            background: url('./imagenes/fondomain.jpg') center/cover no-repeat;
-            filter: blur(12px) brightness(0.85);
-            opacity: 1;
-            pointer-events: none;
+            display: none !important;
         }
         .gallery-cascade-container {
             position: relative;
