@@ -258,6 +258,26 @@ function renderGallery(styleName) {
     }
 }
 
+// Utilidad para fondo de modal con imagen
+function setModalBackgroundWithImage(modal) {
+    if (!modal.querySelector('.modal-bg-img')) {
+        const bg = document.createElement('img');
+        bg.src = 'imagenes/fondo.jpg';
+        bg.alt = '';
+        bg.className = 'modal-bg-img';
+        bg.style.position = 'fixed';
+        bg.style.top = '0';
+        bg.style.left = '0';
+        bg.style.width = '100vw';
+        bg.style.height = '100vh';
+        bg.style.objectFit = 'cover';
+        bg.style.zIndex = '-1';
+        bg.style.filter = 'blur(12px) brightness(0.7)';
+        bg.style.pointerEvents = 'none';
+        modal.prepend(bg);
+    }
+}
+
 // Modal fullscreen para imágenes
 function openModal(src, alt) {
     let modal = document.getElementById('img-modal');
@@ -269,23 +289,24 @@ function openModal(src, alt) {
         modal.style.left = '0';
         modal.style.width = '100vw';
         modal.style.height = '100vh';
-        modal.style.background = 'rgba(0,0,0,0.95)';
         modal.style.display = 'flex';
         modal.style.alignItems = 'center';
         modal.style.justifyContent = 'center';
         modal.style.zIndex = '9999';
         modal.innerHTML = `<img id='modal-img' style='max-width:90vw;max-height:85vh;border-radius:12px;box-shadow:0 8px 32px 0 rgba(0,0,0,0.25);'><span id='close-modal' style='position:fixed;top:2rem;right:2rem;font-size:2.5rem;color:#fff;cursor:pointer;z-index:10001;'>&times;</span>`;
         document.body.appendChild(modal);
-        document.getElementById('close-modal').onclick = function() {
-            modal.style.display = 'none';
-        };
-        modal.onclick = function(e) {
-            if (e.target === modal) modal.style.display = 'none';
-        };
     }
+    setModalBackgroundWithImage(modal);
     document.getElementById('modal-img').src = src;
     document.getElementById('modal-img').alt = alt;
+    modal.style.background = 'transparent';
     modal.style.display = 'flex';
+    document.getElementById('close-modal').onclick = function() {
+        modal.style.display = 'none';
+    };
+    modal.onclick = function(e) {
+        if (e.target === modal) modal.style.display = 'none';
+    };
 }
 
 // Modal fullscreen para imágenes Ilustración con navegación
@@ -300,7 +321,6 @@ function openModalIlustracion(idx) {
         modal.style.left = '0';
         modal.style.width = '100vw';
         modal.style.height = '100vh';
-        modal.style.background = 'rgba(0,0,0,0.97)';
         modal.style.display = 'flex';
         modal.style.alignItems = 'center';
         modal.style.justifyContent = 'center';
@@ -312,6 +332,8 @@ function openModalIlustracion(idx) {
             <span id='close-modal-ilustracion' style='position:fixed;top:2rem;right:2rem;font-size:2.5rem;color:#fff;cursor:pointer;z-index:10001;'>&times;</span>`;
         document.body.appendChild(modal);
     }
+    setModalBackgroundWithImage(modal);
+    modal.style.background = 'transparent';
     function updateImg() {
         document.getElementById('modal-img-ilustracion').src = imgs[idx].src;
         document.getElementById('modal-img-ilustracion').alt = imgs[idx].alt;
@@ -348,7 +370,6 @@ function openModalNalion(idx) {
         modal.style.left = '0';
         modal.style.width = '100vw';
         modal.style.height = '100vh';
-        modal.style.background = 'rgba(0,0,0,0.97)';
         modal.style.display = 'flex';
         modal.style.alignItems = 'center';
         modal.style.justifyContent = 'center';
@@ -360,6 +381,8 @@ function openModalNalion(idx) {
             <span id='close-modal-nalion' style='position:fixed;top:2rem;right:2rem;font-size:2.5rem;color:#fff;cursor:pointer;z-index:10001;'>&times;</span>`;
         document.body.appendChild(modal);
     }
+    setModalBackgroundWithImage(modal);
+    modal.style.background = 'transparent';
     function updateImg() {
         document.getElementById('modal-img-nalion').src = imgs[idx].src;
         document.getElementById('modal-img-nalion').alt = imgs[idx].alt;
@@ -396,7 +419,6 @@ function openModalPortfolio(idx) {
         modal.style.left = '0';
         modal.style.width = '100vw';
         modal.style.height = '100vh';
-        modal.style.background = 'rgba(0,0,0,0.97)';
         modal.style.display = 'flex';
         modal.style.alignItems = 'center';
         modal.style.justifyContent = 'center';
@@ -408,6 +430,8 @@ function openModalPortfolio(idx) {
             <span id='close-modal-portfolio' style='position:fixed;top:2rem;right:2rem;font-size:2.5rem;color:#fff;cursor:pointer;z-index:10001;'>&times;</span>`;
         document.body.appendChild(modal);
     }
+    setModalBackgroundWithImage(modal);
+    modal.style.background = 'transparent';
     function updateImg() {
         document.getElementById('modal-img-portfolio').src = imgs[idx].src;
         document.getElementById('modal-img-portfolio').alt = imgs[idx].alt;
@@ -664,7 +688,6 @@ function openModalIdentidad(idx, identidad) {
         modal.style.left = '0';
         modal.style.width = '100vw';
         modal.style.height = '100vh';
-        modal.style.background = 'rgba(0,0,0,0.97)';
         modal.style.display = 'flex';
         modal.style.alignItems = 'center';
         modal.style.justifyContent = 'center';
@@ -676,6 +699,8 @@ function openModalIdentidad(idx, identidad) {
             <span id='close-modal-identidad' style='position:fixed;top:2rem;right:2rem;font-size:2.5rem;color:#fff;cursor:pointer;z-index:10001;'>&times;</span>`;
         document.body.appendChild(modal);
     }
+    setModalBackgroundWithImage(modal);
+    modal.style.background = 'transparent';
     function updateImg() {
         document.getElementById('modal-img-identidad').src = imgs[idx].src;
         document.getElementById('modal-img-identidad').alt = imgs[idx].alt;
