@@ -986,7 +986,7 @@ window.onload = function() {
         window.location.href = 'index.html';
     };
     // Flechas solo para desarrollo web
-    const devWebNames = ['Nalion', 'zodiaco', 'zapateria', 'portfolio', 'playwrong'];
+    const devWebNames = ['Nalion', 'portfolio', 'playwrong', 'zapateria', 'zodiaco'];
     if (devWebNames.includes(styleName)) {
         document.getElementById('prev-style').style.display = '';
         document.getElementById('next-style').style.display = '';
