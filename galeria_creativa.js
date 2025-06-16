@@ -253,14 +253,22 @@ function renderGallery(styleName) {
             'banatorrela.jpg',
             'Bittore.png',
             'SAN ROKE FIN.jpg',
-            'feria.jpg', // Cambiado a la ilustración del cartel de feria
+            'feria.jpg'
         ];
         const cartelesHtml = `
             <h3 style="color:#fff;text-align:left;margin-bottom:1.2rem;">Carteles</h3>
-            <div class="cascade-img-row">
-                ${carteles.map((img, idx) => `<div class='cascade-img-wrap'><img src='imagenes/diseño/ilustracion/carteles/${img}' class='cascade-img' alt='Cartel' onclick='openModalIlustracion(${idx})'></div>`).join('')}
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2.5rem; margin-bottom: 3rem;">
+                ${carteles.map((img, idx) => `
+                    <div class="gallery-item">
+                        <img src='imagenes/diseño/ilustracion/carteles/${img}' 
+                            class="gallery-img"
+                            onclick='openModalIlustracion(${idx})'
+                            alt='Cartel'>
+                    </div>
+                `).join('')}
             </div>
         `;
+
         // Otros trabajos
         const otrosImgs = [
             'prest5.jpg',
@@ -276,8 +284,15 @@ function renderGallery(styleName) {
         if (otrosImgs.length > 0) {
             otrosHtml = `
                 <h3 style="color:#fff;text-align:left;margin-bottom:1.2rem;">Otros trabajos</h3>
-                <div class="cascade-img-row">
-                    ${otrosImgs.map((img, idx) => `<div class='cascade-img-wrap'><img src='imagenes/diseño/ilustracion/otros/${img}' class='cascade-img' alt='Otros trabajos' onclick='openModalIlustracion(${carteles.length + idx}, true)'></div>`).join('')}
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2.5rem;">
+                    ${otrosImgs.map((img, idx) => `
+                        <div class="gallery-item">
+                            <img src='imagenes/diseño/ilustracion/otros/${img}' 
+                                class="gallery-img"
+                                onclick='openModalIlustracion(${carteles.length + idx}, true)'
+                                alt='Otros trabajos'>
+                        </div>
+                    `).join('')}
                 </div>
             `;
         }
@@ -288,6 +303,7 @@ function renderGallery(styleName) {
             ...carteles.map(img => ({ src: `imagenes/diseño/ilustracion/carteles/${img}`, alt: 'Cartel' })),
             ...otrosImgs.map(img => ({ src: `imagenes/diseño/ilustracion/otros/${img}`, alt: 'Otros trabajos' }))
         ];
+        return;
     } else if (styleName === 'Nalion') {
         // Galería Nalion: texto y bloques, sin mostrar logo suelto, imágenes grandes, click para fullscreen con navegación
         const nalionImgs = [

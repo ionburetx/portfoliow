@@ -208,32 +208,34 @@ body::before {
 /* Galería Fotografía */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
     margin: 0 auto;
+    padding: 1rem;
 }
 .gallery-item {
-    aspect-ratio: 1/1;
-    overflow: hidden;
-    border-radius: 16px;
-    box-shadow: var(--shadow);
     cursor: pointer;
     position: relative;
-    background: var(--glass);
-    transition: transform 0.2s;
+    background: transparent;
+    transition: transform 0.3s, filter 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .gallery-item:hover {
     transform: scale(1.04);
 }
 .gallery-img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: filter 0.3s, transform 0.3s;
+    height: auto;
+    object-fit: contain;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.15));
+    max-height: 280px;
 }
 .gallery-item:hover .gallery-img {
-    filter: brightness(0.92) blur(1px);
-    transform: scale(1.07);
+    transform: translateY(-8px);
+    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.2));
 }
 
 .fullscreen-modal {
