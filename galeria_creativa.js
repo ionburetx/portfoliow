@@ -33,8 +33,165 @@ function getQueryParam(param) {
     return urlParams.get(param);
 }
 
+// Modal para imágenes de proyectos
+let currentGalleryImages = [];
+let currentImageIndex = 0;
+
+function updateModalImage(index) {
+    const modalImg = document.querySelector('.modal-img');
+    modalImg.src = currentGalleryImages[index];
+    modalImg.alt = `Image ${index + 1}`;
+}
+
+function openProjectModal(src, alt) {
+    let modal = document.querySelector('.fullscreen-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.className = 'fullscreen-modal';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <img class="modal-img">
+                <button class="close-modal">&times;</button>
+                <button class="modal-nav modal-prev">&lt;</button>
+                <button class="modal-nav modal-next">&gt;</button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        // Add event listeners
+        modal.querySelector('.close-modal').addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+
+        modal.querySelector('.modal-prev').addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentImageIndex > 0) {
+                currentImageIndex--;
+                updateModalImage(currentImageIndex);
+            }
+        });
+
+        modal.querySelector('.modal-next').addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (currentImageIndex < currentGalleryImages.length - 1) {
+                currentImageIndex++;
+                updateModalImage(currentImageIndex);
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (modal.classList.contains('active')) {
+                if (e.key === 'ArrowLeft' && currentImageIndex > 0) {
+                    currentImageIndex--;
+                    updateModalImage(currentImageIndex);
+                } else if (e.key === 'ArrowRight' && currentImageIndex < currentGalleryImages.length - 1) {
+                    currentImageIndex++;
+                    updateModalImage(currentImageIndex);
+                } else if (e.key === 'Escape') {
+                    modal.classList.remove('active');
+                }
+            }
+        });
+    }
+
+    // Get all images in the current gallery
+    const styleName = getQueryParam('style');
+    if (styleName === 'zapateria') {
+        currentGalleryImages = [
+            'imagenes/desweb/zapateria/larulla.png',
+            'imagenes/desweb/zapateria/zapa1.png',
+            'imagenes/desweb/zapateria/zapa2.png',
+            'imagenes/desweb/zapateria/zapa3.png'
+        ];
+    } else if (styleName === 'playwrong') {
+        currentGalleryImages = [
+            'imagenes/desweb/playwrong/Logoplaywrong.png',
+            'imagenes/desweb/playwrong/Logoplaywrongblanco.png',
+            'imagenes/desweb/playwrong/pw1.png',
+            'imagenes/desweb/playwrong/pw2.png',
+            'imagenes/desweb/playwrong/pw3.png',
+            'imagenes/desweb/playwrong/medallon.png'
+        ];
+    }
+
+    currentImageIndex = currentGalleryImages.indexOf(src);
+    updateModalImage(currentImageIndex);
+    modal.classList.add('active');
+}
+
 function renderGallery(styleName) {
     const gallery = document.getElementById('gallery-cascade');
+    
+    if (styleName === 'zapateria') {
+        const html = `
+            <div class="projects-showcase">
+                <h3 style="color:#fff;font-size:1.3rem;font-weight:700;margin-bottom:1.5rem;">Logotipo</h3>
+                <img src="imagenes/desweb/zapateria/larulla.png" alt="Logo Zapatería" 
+                    style="max-width:300px;width:100%;margin-bottom:2.5rem;background:#fff;padding:1rem;border-radius:8px;cursor:pointer;"
+                    onclick="openProjectModal('imagenes/desweb/zapateria/larulla.png', 'Logo Zapatería')">
+                
+                <h3 style="color:#fff;font-size:1.3rem;font-weight:700;margin:2rem 0 1.5rem;">Boceto alta fidelidad (Desktop)</h3>
+                <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;margin-bottom:2.5rem;">
+                    <img src="imagenes/desweb/zapateria/zapa1.png" alt="Boceto Desktop 1" 
+                        style="max-width:400px;width:100%;background:#fff;padding:1rem;border-radius:8px;cursor:pointer;"
+                        onclick="openProjectModal('imagenes/desweb/zapateria/zapa1.png', 'Boceto Desktop 1')">
+                    <img src="imagenes/desweb/zapateria/zapa2.png" alt="Boceto Desktop 2" 
+                        style="max-width:400px;width:100%;background:#fff;padding:1rem;border-radius:8px;cursor:pointer;"
+                        onclick="openProjectModal('imagenes/desweb/zapateria/zapa2.png', 'Boceto Desktop 2')">
+                </div>
+
+                <h3 style="color:#fff;font-size:1.3rem;font-weight:700;margin:2rem 0 1.5rem;">Recibo</h3>
+                <img src="imagenes/desweb/zapateria/zapa3.png" alt="Recibo" 
+                    style="max-width:300px;width:100%;margin-bottom:2rem;background:#fff;padding:1rem;border-radius:8px;cursor:pointer;"
+                    onclick="openProjectModal('imagenes/desweb/zapateria/zapa3.png', 'Recibo')">
+            </div>
+        `;
+        gallery.innerHTML = html;
+        document.getElementById('gallery-title').textContent = 'Zapatería';
+        return;
+    }
+
+    if (styleName === 'playwrong') {
+        const html = `
+            <div class="projects-showcase">
+                <h3 style="color:#fff;font-size:1.3rem;font-weight:700;margin-bottom:1.5rem;">Logotipo</h3>
+                <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;margin-bottom:2.5rem;">
+                    <img src="imagenes/desweb/playwrong/Logoplaywrong.png" alt="Logo Playwrong" 
+                        style="max-width:300px;width:100%;background:#fff;padding:1rem;border-radius:8px;cursor:pointer;"
+                        onclick="openProjectModal('imagenes/desweb/playwrong/Logoplaywrong.png', 'Logo Playwrong')">
+                    <img src="imagenes/desweb/playwrong/Logoplaywrongblanco.png" alt="Logo Playwrong Blanco" 
+                        style="max-width:300px;width:100%;background:#18191c;padding:1rem;border-radius:8px;cursor:pointer;"
+                        onclick="openProjectModal('imagenes/desweb/playwrong/Logoplaywrongblanco.png', 'Logo Playwrong Blanco')">
+                </div>
+
+                <h3 style="color:#fff;font-size:1.3rem;font-weight:700;margin:2rem 0 1.5rem;">Medallón</h3>
+                <img src="imagenes/desweb/playwrong/medallon.png" alt="Medallón" 
+                    style="max-width:300px;width:100%;margin-bottom:2.5rem;background:#fff;padding:1rem;border-radius:8px;cursor:pointer;"
+                    onclick="openProjectModal('imagenes/desweb/playwrong/medallon.png', 'Medallón')">
+
+                <h3 style="color:#fff;font-size:1.3rem;font-weight:700;margin:2rem 0 1.5rem;">Boceto alta fidelidad (Desktop)</h3>
+                <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;margin-bottom:2.5rem;">
+                    <img src="imagenes/desweb/playwrong/pw1.png" alt="Boceto Desktop 1" 
+                        style="max-width:400px;width:100%;background:#fff;padding:1rem;border-radius:8px;cursor:pointer;"
+                        onclick="openProjectModal('imagenes/desweb/playwrong/pw1.png', 'Boceto Desktop 1')">
+                    <img src="imagenes/desweb/playwrong/pw2.png" alt="Boceto Desktop 2" 
+                        style="max-width:400px;width:100%;background:#fff;padding:1rem;border-radius:8px;cursor:pointer;"
+                        onclick="openProjectModal('imagenes/desweb/playwrong/pw2.png', 'Boceto Desktop 2')">
+                    <img src="imagenes/desweb/playwrong/pw3.png" alt="Boceto Desktop 3" 
+                        style="max-width:400px;width:100%;background:#fff;padding:1rem;border-radius:8px;cursor:pointer;"
+                        onclick="openProjectModal('imagenes/desweb/playwrong/pw3.png', 'Boceto Desktop 3')">
+                </div>
+            </div>
+        `;
+        gallery.innerHTML = html;
+        document.getElementById('gallery-title').textContent = 'Playwrong';
+        return;
+    }
+
     if (styleName === 'identidad') {
         // Identidad Corporativa: 6 cards cuadradas, diseño uniforme y clicables
         const identidadData = [
@@ -250,6 +407,70 @@ function renderGallery(styleName) {
         gallery.innerHTML = html;
         document.getElementById('gallery-title').textContent = 'Portfolio';
         window.portfolioImgs = portfolioImgs;
+        return;
+    } else if (styleName === 'zapateria') {
+        const html = `
+            <div class="projects-showcase">
+                <h3 style="color:#fff;font-size:1.3rem;font-weight:700;margin-bottom:1.5rem;">Logotipo</h3>
+                <img src="imagenes/desweb/zapateria/larulla.png" alt="Logo Zapatería" 
+                    style="max-width:300px;width:100%;margin-bottom:2.5rem;background:#fff;padding:1rem;border-radius:8px;cursor:pointer;"
+                    onclick="openProjectModal('imagenes/desweb/zapateria/larulla.png', 'Logo Zapatería')">
+                
+                <h3 style="color:#fff;font-size:1.3rem;font-weight:700;margin:2rem 0 1.5rem;">Boceto alta fidelidad (Desktop)</h3>
+                <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;margin-bottom:2.5rem;">
+                    <img src="imagenes/desweb/zapateria/zapa1.png" alt="Boceto Desktop 1" 
+                        style="max-width:400px;width:100%;background:#fff;padding:1rem;border-radius:8px;cursor:pointer;"
+                        onclick="openProjectModal('imagenes/desweb/zapateria/zapa1.png', 'Boceto Desktop 1')">
+                    <img src="imagenes/desweb/zapateria/zapa2.png" alt="Boceto Desktop 2" 
+                        style="max-width:400px;width:100%;background:#fff;padding:1rem;border-radius:8px;cursor:pointer;"
+                        onclick="openProjectModal('imagenes/desweb/zapateria/zapa2.png', 'Boceto Desktop 2')">
+                </div>
+
+                <h3 style="color:#fff;font-size:1.3rem;font-weight:700;margin:2rem 0 1.5rem;">Recibo</h3>
+                <img src="imagenes/desweb/zapateria/zapa3.png" alt="Recibo" 
+                    style="max-width:300px;width:100%;margin-bottom:2rem;background:#fff;padding:1rem;border-radius:8px;cursor:pointer;"
+                    onclick="openProjectModal('imagenes/desweb/zapateria/zapa3.png', 'Recibo')">
+            </div>
+        `;
+        gallery.innerHTML = html;
+        document.getElementById('gallery-title').textContent = 'Zapatería';
+        return;
+    }
+
+    if (styleName === 'playwrong') {
+        const html = `
+            <div class="projects-showcase">
+                <h3 style="color:#fff;font-size:1.3rem;font-weight:700;margin-bottom:1.5rem;">Logotipo</h3>
+                <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;margin-bottom:2.5rem;">
+                    <img src="imagenes/desweb/playwrong/Logoplaywrong.png" alt="Logo Playwrong" 
+                        style="max-width:300px;width:100%;background:#fff;padding:1rem;border-radius:8px;cursor:pointer;"
+                        onclick="openProjectModal('imagenes/desweb/playwrong/Logoplaywrong.png', 'Logo Playwrong')">
+                    <img src="imagenes/desweb/playwrong/Logoplaywrongblanco.png" alt="Logo Playwrong Blanco" 
+                        style="max-width:300px;width:100%;background:#18191c;padding:1rem;border-radius:8px;cursor:pointer;"
+                        onclick="openProjectModal('imagenes/desweb/playwrong/Logoplaywrongblanco.png', 'Logo Playwrong Blanco')">
+                </div>
+
+                <h3 style="color:#fff;font-size:1.3rem;font-weight:700;margin:2rem 0 1.5rem;">Medallón</h3>
+                <img src="imagenes/desweb/playwrong/medallon.png" alt="Medallón" 
+                    style="max-width:300px;width:100%;margin-bottom:2.5rem;background:#fff;padding:1rem;border-radius:8px;cursor:pointer;"
+                    onclick="openProjectModal('imagenes/desweb/playwrong/medallon.png', 'Medallón')">
+
+                <h3 style="color:#fff;font-size:1.3rem;font-weight:700;margin:2rem 0 1.5rem;">Boceto alta fidelidad (Desktop)</h3>
+                <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;margin-bottom:2.5rem;">
+                    <img src="imagenes/desweb/playwrong/pw1.png" alt="Boceto Desktop 1" 
+                        style="max-width:400px;width:100%;background:#fff;padding:1rem;border-radius:8px;cursor:pointer;"
+                        onclick="openProjectModal('imagenes/desweb/playwrong/pw1.png', 'Boceto Desktop 1')">
+                    <img src="imagenes/desweb/playwrong/pw2.png" alt="Boceto Desktop 2" 
+                        style="max-width:400px;width:100%;background:#fff;padding:1rem;border-radius:8px;cursor:pointer;"
+                        onclick="openProjectModal('imagenes/desweb/playwrong/pw2.png', 'Boceto Desktop 2')">
+                    <img src="imagenes/desweb/playwrong/pw3.png" alt="Boceto Desktop 3" 
+                        style="max-width:400px;width:100%;background:#fff;padding:1rem;border-radius:8px;cursor:pointer;"
+                        onclick="openProjectModal('imagenes/desweb/playwrong/pw3.png', 'Boceto Desktop 3')">
+                </div>
+            </div>
+        `;
+        gallery.innerHTML = html;
+        document.getElementById('gallery-title').textContent = 'Playwrong';
         return;
     } else {
         const style = creativeStyles.find(s => s.name === styleName) || creativeStyles[0];
@@ -749,7 +970,7 @@ window.onload = function() {
         window.location.href = 'index.html';
     };
     // Flechas solo para desarrollo web
-    const devWebNames = ['Nalion', 'zodiaco', 'zapateria', 'portfolio', 'playwright'];
+    const devWebNames = ['Nalion', 'zodiaco', 'zapateria', 'portfolio', 'playwrong'];
     if (devWebNames.includes(styleName)) {
         document.getElementById('prev-style').style.display = '';
         document.getElementById('next-style').style.display = '';
