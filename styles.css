@@ -240,33 +240,60 @@ body::before {
     display: none;
     position: fixed;
     z-index: 9999;
-    left: 0; top: 0; width: 100vw; height: 100vh;
-    background: rgba(30,32,38,0.92);
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(18, 18, 24, 0.95);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
+
 .fullscreen-modal.active {
     display: flex;
+    opacity: 1;
+    align-items: center;
+    justify-content: center;
 }
+
+.modal-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
 .modal-img {
-    max-width: 90vw;
-    max-height: 80vh;
-    border-radius: 18px;
-    box-shadow: 0 8px 32px 0 rgba(255,107,53,0.18);
+    max-width: 95vw;
+    max-height: 95vh;
+    object-fit: contain;
+    border-radius: 0;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
+
 .close-modal {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    background: none;
+    border: none;
     color: #fff;
     font-size: 2.5rem;
-    position: absolute;
-    top: 2rem;
-    right: 3rem;
     cursor: pointer;
-    z-index: 10001;
-    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s, transform 0.2s;
+    z-index: 10000;
 }
+
 .close-modal:hover {
     color: var(--accent);
+    transform: scale(1.1);
 }
 
 /* Sobre mí */
@@ -319,11 +346,24 @@ body::before {
     margin-bottom: 1.2rem;
     color: var(--accent);
 }
+#sobre-mi::before {
+    content: '';
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(8px) brightness(1.1);
+    pointer-events: none;
+    z-index: -1;
+}
+
 #sobre-mi.section {
-    background: url('./imagenes/fondobio.png') center/cover no-repeat fixed;
-    border-radius: 24px;
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(6px) !important;
+    position: relative;
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
     padding-bottom: 2.5rem !important;
     margin-bottom: 0 !important;
 }
@@ -367,10 +407,10 @@ body::before {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     z-index: 1;
-    transition: filter 0.3s, transform 0.3s;
+    transition: transform 0.3s ease;
 }
 .photo-style-card:hover .photo-style-img {
-    filter: brightness(0.92) blur(1px);
+    transform: scale(1.08);
 }
 .card-overlay {
     position: absolute;
@@ -623,4 +663,82 @@ body.galeria-foto-bg::after {
   z-index: 0;
   background: rgba(20,22,30,0.55); /* Overlay oscuro solo para galeria */
   pointer-events: none;
+}
+
+/* Fondo para la página de galería */
+body.galeria-foto-bg {
+    background: url('./imagenes/fondomain.jpg') center center / cover no-repeat fixed !important;
+    width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body.galeria-foto-bg::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: inherit;
+    filter: blur(8px);
+    z-index: -1;
+    pointer-events: none;
+}
+
+body.galeria-foto-bg::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.4);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Estilos para el encabezado de la galería */
+.gallery-cascade-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+}
+
+.gallery-cascade-title {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 0;
+}
+
+.gallery-close-btn {
+    position: fixed;
+    top: 1.5rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s, transform 0.2s;
+    z-index: 1000;
+}
+
+.gallery-close-btn:hover {
+    color: var(--accent);
+    transform: scale(1.1);
 }
